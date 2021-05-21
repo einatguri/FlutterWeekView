@@ -159,11 +159,17 @@ class _DayViewState extends ZoomableHeadersWidgetState<DayView> {
         .map((entry) => entry.value.createWidget(context, widget, entry.key))
         .toList();
     if (widget.hoursColumnStyle.width > 0) {
-      children.add(Positioned(
-        top: 0,
-        left: 0,
-        child: HoursColumn.fromHeadersWidgetState(parent: this),
-      ));
+      children.add(currentDayViewStyle.isRtl
+          ? Positioned(
+              top: 0,
+              right: 0,
+              child: HoursColumn.fromHeadersWidgetState(parent: this),
+            )
+          : Positioned(
+              top: 0,
+              left: 0,
+              child: HoursColumn.fromHeadersWidgetState(parent: this),
+            ));
     }
 
     if (Utils.sameDay(widget.date) &&

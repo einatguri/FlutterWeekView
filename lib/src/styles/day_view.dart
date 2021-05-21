@@ -8,6 +8,9 @@ import 'package:flutter_week_view/src/widgets/zoomable_header_widget.dart';
 
 /// Allows to style a day view.
 class DayViewStyle extends ZoomableHeaderWidgetStyle {
+  ///Allow RTL support and position hoursColumn on the right
+  final bool isRtl;
+
   /// An hour row height (with a zoom factor set to 1). Defaults to 60.
   final double hourRowHeight;
 
@@ -61,6 +64,7 @@ class DayViewStyle extends ZoomableHeaderWidgetStyle {
     double? currentTimeRuleHeight,
     this.currentTimeCircleColor,
     double? currentTimeCircleRadius,
+    this.isRtl = false,
     CurrentTimeCirclePosition? currentTimeCirclePosition,
   })  : hourRowHeight = (hourRowHeight ?? 60) < 0 ? 0 : (hourRowHeight ?? 60),
         backgroundColor = backgroundColor ?? const Color(0xFFF2F2F2),
