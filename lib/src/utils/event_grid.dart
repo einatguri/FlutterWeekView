@@ -14,13 +14,14 @@ class EventGrid {
       drawPropertiesList.add(drawProperties);
 
   /// Processes all display properties added to the grid.
-  void processEvents(double hoursColumnWidth, double eventsColumnWidth) {
+  void processEvents(
+      double hoursColumnWidth, double eventsColumnWidth, bool isRtl) {
     List<List<EventDrawProperties>> columns = [];
     DateTime? lastEventEnding;
     for (EventDrawProperties drawProperties in drawPropertiesList) {
       if (lastEventEnding != null &&
           drawProperties.start!.isAfter(lastEventEnding)) {
-        packEvents(columns, hoursColumnWidth, eventsColumnWidth);
+        packEvents(columns, hoursColumnWidth, eventsColumnWidth, isRtl);
         columns.clear();
         lastEventEnding = null;
       }
@@ -45,18 +46,20 @@ class EventGrid {
     }
 
     if (columns.isNotEmpty) {
-      packEvents(columns, hoursColumnWidth, eventsColumnWidth);
+      packEvents(columns, hoursColumnWidth, eventsColumnWidth, isRtl);
     }
   }
 
   /// Sets the left and right positions for each event in the connected group.
   void packEvents(List<List<EventDrawProperties>> columns,
-      double hoursColumnWidth, double eventsColumnWidth) {
+      double hoursColumnWidth, double eventsColumnWidth, bool isRtl) {
     for (int columnIndex = 0; columnIndex < columns.length; columnIndex++) {
       List<EventDrawProperties> column = columns[columnIndex];
       for (EventDrawProperties drawProperties in column) {
-        drawProperties.left = hoursColumnWidth +
-            (columnIndex / columns.length) * eventsColumnWidth;
+        drawProperties.left = isRtl
+            ? 0
+            : hoursColumnWidth +
+                (columnIndex / columns.length) * eventsColumnWidth;
         int colSpan = calculateColSpan(columns, drawProperties, columnIndex);
         drawProperties.width = (eventsColumnWidth * colSpan) / (columns.length);
       }

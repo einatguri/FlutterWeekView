@@ -111,8 +111,8 @@ class _DayViewState extends ZoomableHeadersWidgetState<DayView> {
           mainWidget,
           Positioned(
             top: 0,
-            left: widget.style.isRtl ? 0 : widget.hoursColumnStyle.width,
-            right: widget.style.isRtl ? widget.hoursColumnStyle.width : 0,
+            left: widget.hoursColumnStyle.width,
+            right: 0,
             child: DayBar.fromHeadersWidgetState(
               parent: widget,
               date: widget.date,
@@ -243,7 +243,7 @@ class _DayViewState extends ZoomableHeadersWidgetState<DayView> {
           (context.findRenderObject() as RenderBox).size.width -
               widget.hoursColumnStyle.width;
       eventsGrid.processEvents(
-          widget.hoursColumnStyle.width, eventsColumnWidth);
+          widget.hoursColumnStyle.width, eventsColumnWidth, widget.style.isRtl);
     }
   }
 }
