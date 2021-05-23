@@ -111,8 +111,8 @@ class DefaultBuilders {
 
     return Positioned(
       top: topOffsetCalculator(HourMinute.now()),
-      left: hoursColumnWidth,
-      right: 0,
+      left: dayViewStyle.isRtl ? 0 : hoursColumnWidth,
+      right: dayViewStyle.isRtl ? hoursColumnWidth : 0,
       child: Row(children: children),
     );
   }

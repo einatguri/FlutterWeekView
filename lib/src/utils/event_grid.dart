@@ -57,7 +57,7 @@ class EventGrid {
       List<EventDrawProperties> column = columns[columnIndex];
       for (EventDrawProperties drawProperties in column) {
         drawProperties.left = isRtl
-            ? 0
+            ? (columnIndex / columns.length) * eventsColumnWidth
             : hoursColumnWidth +
                 (columnIndex / columns.length) * eventsColumnWidth;
         int colSpan = calculateColSpan(columns, drawProperties, columnIndex);
